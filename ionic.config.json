@@ -1,0 +1,7 @@
+{
+  "name": "xiva-front",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
