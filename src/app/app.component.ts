@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { loadMessages, locale } from 'devextreme/localization';
+import jaMessages from 'devextreme/localization/messages/ja.json';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor() {
+    loadMessages(jaMessages);
+    locale(navigator.language);
+  }
 }
