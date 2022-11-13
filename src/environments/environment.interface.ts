@@ -3,6 +3,7 @@ interface FirebaseConfig {
   authDomain: string;
   projectId: string;
   storageBucket: string;
+  locationId: string;
   messagingSenderId: string;
   appId: string;
   measurementId: string;
@@ -10,5 +11,5 @@ interface FirebaseConfig {
 
 export default interface Environment {
   production: boolean;
-  firebaseConfig: FirebaseConfig
+  firebase: FirebaseConfig
 }
