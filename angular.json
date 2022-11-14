@@ -38,7 +38,14 @@
             "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "allowedCommonJsDependencies": [
+              "jszip",
+              "devexpress-diagram",
+              "devexpress-gantt",
+              "devextreme-quill",
+              "luxon"
+            ]
           },
           "configurations": {
             "production": {
