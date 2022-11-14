@@ -1,6 +1,15 @@
 <dx-scheduler
   [timeZone]="timeZone"
-  [views]="['day', 'week', 'month']"
+  [views]="['day', 'week', 'month', 'agenda']"
   currentView="day"
   [currentDate]="currentDate"
-></dx-scheduler>
+>
+  <dxo-editing
+    #editingOptions
+    [allowAdding]="false"
+    [allowDeleting]="false"
+    [allowUpdating]="false"
+    [allowResizing]="false"
+    [allowDragging]="false"
+  ></dxo-editing>
+</dx-scheduler>
