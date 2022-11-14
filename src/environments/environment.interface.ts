@@ -11,5 +11,5 @@ interface FirebaseConfig {
 
 export default interface Environment {
   production: boolean;
-  firebase: FirebaseConfig
+  firebase: FirebaseConfig;
 }
