@@ -4,12 +4,13 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
-import { provideAnalytics, getAnalytics, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth())
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
