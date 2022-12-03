@@ -1,12 +1,13 @@
 <dx-scheduler
+  [showAllDayPanel]="false"
   [timeZone]="timeZone"
   [views]="['day', 'week', 'month', 'agenda']"
   currentView="day"
   [currentDate]="currentDate"
+  (onAppointmentFormOpening)="onFormOpening($event)"
 >
   <dxo-editing
     #editingOptions
-    [allowAdding]="false"
     [allowDeleting]="false"
     [allowUpdating]="false"
     [allowResizing]="false"
