@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import CustomStore from 'devextreme/data/custom_store';
 import dxForm from 'devextreme/ui/form';
+import { firstValueFrom, tap } from 'rxjs';
+import { Schedule } from '../../interfaces/scheduler';
 import { FirestoreService } from '../../services/firestore.service';
 
 @Component({
@@ -10,24 +12,35 @@ import { FirestoreService } from '../../services/firestore.service';
 })
 export class SchedulerComponent implements OnInit {
   timeZone: string;
-  currentDate: Date;
-
+  currentDate: Date | string | number;
   schedules: CustomStore;
 
   constructor(private firestoreService: FirestoreService) {
     this.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     this.currentDate = new Date();
 
-    this.schedules = new CustomStore({
+    this.schedules = new CustomStore<Schedule, string>({
       key: 'id',
-      loadMode: 'raw',
       load: () => {
-        return []
+        return  firstValueFrom(this.firestoreService.getSchedules().pipe(
+          tap(a => console.log(a))
+        ))
+      },
+      insert: async (value: Schedule) => {
+        return firstValueFrom(await this.firestoreService.addSchedule(value));
+      },
+      remove: async (key: string) => {
+        this.firestoreService.deleteSchedule(key)
+      },
+      update: async (key: string, value: Schedule) => {
+        return await this.firestoreService.updateSchedule(key, value)
       }
     });
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    
+  }
 
   onFormOpening(data: any) {
     const form: dxForm = data.form;
@@ -64,7 +77,7 @@ export class SchedulerComponent implements OnInit {
         editorOptions: {
           type: 'datetime',
         },
-        dataField: 'startAt',
+        dataField: 'startDate',
         isRequired: true,
       },
       {
@@ -75,9 +88,18 @@ export class SchedulerComponent implements OnInit {
         editorOptions: {
           type: 'datetime',
         },
-        dataField: 'endAt',
+        dataField: 'endDate',
         isRequired: true,
       }
-    ])
+    ]);
+  }
+
+  reloadSource() {
+    this.schedules.clearRawDataCache();
+    this.schedules.load();
+  }
+
+  log(a: any) {
+    console.log(a)
   }
 }
