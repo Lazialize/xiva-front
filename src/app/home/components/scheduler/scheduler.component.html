@@ -1,6 +1,30 @@
 <dx-scheduler
-  [timeZone]="timeZone"
-  [views]="['day', 'week', 'month']"
+  appointmentTemplate="schedule-template"
   currentView="day"
-  [currentDate]="currentDate"
-></dx-scheduler>
+  textExpr="description"
+  [showAllDayPanel]="false"
+  [timeZone]="timeZone"
+  [views]="['day', 'week', 'month', 'agenda']"
+  [(currentDate)]="currentDate"
+  [dataSource]="schedules"
+  (onAppointmentFormOpening)="onFormOpening($event)"
+>
+  <dxo-editing
+    #editingOptions
+    [allowResizing]="false"
+    [allowDragging]="false"
+  ></dxo-editing>
+
+  <div *dxTemplate="let model of 'schedule-template'">
+    <div class="showtime-preview">
+      <div>{{ model.targetedAppointmentData.title }}</div>
+      <div class="dropdown-appointment-dates">
+        {{
+          (model.targetedAppointmentData.startDate | date: "shortTime") +
+            " - " +
+            (model.targetedAppointmentData.endDate | date: "shortTime")
+        }}
+      </div>
+    </div>
+  </div>
+</dx-scheduler>

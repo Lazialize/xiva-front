@@ -8,15 +8,8 @@ import { DxSchedulerModule } from 'devextreme-angular';
 import { SchedulerComponent } from './components/scheduler/scheduler.component';
 import { HomePageRoutingModule } from './home-routing.module';
 
-
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    DxSchedulerModule,
-    HomePageRoutingModule
-  ],
-  declarations: [HomePage, SchedulerComponent]
+  imports: [CommonModule, FormsModule, IonicModule, DxSchedulerModule, HomePageRoutingModule],
+  declarations: [HomePage, SchedulerComponent],
 })
 export class HomePageModule {}
