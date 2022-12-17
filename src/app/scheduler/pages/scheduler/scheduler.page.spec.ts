@@ -9,11 +9,7 @@ describe('SchedulerPage', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-<<<<<<< HEAD:src/app/home/home.page.spec.ts
-      declarations: [ HomePage ],
-=======
       declarations: [ SchedulerPage ],
->>>>>>> 21adc6e (feat: スケジューラーの置き換え):src/app/scheduler/pages/scheduler/scheduler.page.spec.ts
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
