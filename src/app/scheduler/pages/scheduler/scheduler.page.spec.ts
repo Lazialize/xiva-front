@@ -1,19 +1,23 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { HomePage } from './home.page';
+import { SchedulerPage } from './scheduler.page';
 
-describe('HomePage', () => {
-  let component: HomePage;
-  let fixture: ComponentFixture<HomePage>;
+describe('SchedulerPage', () => {
+  let component: SchedulerPage;
+  let fixture: ComponentFixture<SchedulerPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+<<<<<<< HEAD:src/app/home/home.page.spec.ts
       declarations: [ HomePage ],
+=======
+      declarations: [ SchedulerPage ],
+>>>>>>> 21adc6e (feat: スケジューラーの置き換え):src/app/scheduler/pages/scheduler/scheduler.page.spec.ts
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HomePage);
+    fixture = TestBed.createComponent(SchedulerPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
