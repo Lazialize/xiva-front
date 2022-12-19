@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Schedule } from '../../interfaces/schedule.interface';
 import { ScheduleService } from '../../services/schedule.service';
 
@@ -9,11 +10,11 @@ import { ScheduleService } from '../../services/schedule.service';
 })
 export class SchedulerPage implements OnInit {
 
-  schedules: Schedule[];
+  schedules$: Observable<Schedule[]>;
 
   constructor(private scheduleService: ScheduleService) { }
 
   ngOnInit() {
-  
+    this.schedules$ = this.scheduleService.getSchedules();
   }
 }
