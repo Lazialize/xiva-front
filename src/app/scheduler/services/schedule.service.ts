@@ -6,7 +6,7 @@ import { Schedule, ScheduleForFirestore } from '../interfaces/schedule.interface
 @Injectable({
   providedIn: 'root'
 })
-export class SchuduleService {
+export class ScheduleService {
   private collection: CollectionReference;
 
   constructor(private firestore: Firestore) {

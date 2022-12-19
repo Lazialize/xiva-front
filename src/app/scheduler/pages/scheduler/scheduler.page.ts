@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Schedule } from '../../interfaces/schedule.interface';
+import { ScheduleService } from '../../services/schedule.service';
 
 @Component({
   selector: 'app-scheduler',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SchedulerPage implements OnInit {
 
-  constructor() { }
+  schedules: Schedule[];
+
+  constructor(private scheduleService: ScheduleService) { }
 
   ngOnInit() {
+  
   }
-
 }
