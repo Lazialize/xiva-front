@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "xiva-a0398"
+  },
+  "targets": {
+    "xiva-a0398": {
+      "hosting": {
+        "app": [
+          "xiva-a0398"
+        ]
+      }
+    }
   }
 }
