@@ -1,31 +1,42 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, collectionData, CollectionReference, deleteDoc, doc, docData, DocumentReference, Firestore, updateDoc } from '@angular/fire/firestore';
+import {
+  addDoc,
+  collection,
+  collectionData,
+  CollectionReference,
+  deleteDoc,
+  doc,
+  docData,
+  DocumentReference,
+  Firestore,
+  updateDoc,
+} from '@angular/fire/firestore';
 import { map, Observable } from 'rxjs';
-import { RawSchedule, Schedule } from '../interfaces/scheduler';
+import { Schedule, ScheduleForFirestore } from '../interfaces/schedule.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FirestoreService {
-  collection: CollectionReference;
+export class ScheduleService {
+  private collection: CollectionReference;
 
   constructor(private firestore: Firestore) {
     this.collection = collection(firestore, 'schedules');
   }
 
-  getSchedules() : Observable<Schedule[]>{
+  getSchedules(): Observable<Schedule[]> {
     return collectionData(this.collection, { idField: 'id' }).pipe(
-      map((schedules: RawSchedule[])  => {
+      map((schedules: ScheduleForFirestore[]) => {
         return schedules.map((schedule) => {
-          const { startDate, endDate, ...others } = schedule;
+          const { startTime, endTime, ...others } = schedule;
           return {
             ...others,
-            startDate: new Date(startDate),
-            endDate: new Date(endDate)
-          }
+            startTime: new Date(startTime),
+            endTime: new Date(endTime),
+          };
         });
-      })
-    ) as Observable<Schedule[]>
+      }),
+    ) as Observable<Schedule[]>;
   }
 
   async addSchedule(schedule: Schedule): Promise<Observable<Schedule>> {
@@ -46,13 +57,13 @@ export class FirestoreService {
     return doc(this.firestore, `schedules/${key}`) as DocumentReference<Schedule>;
   }
 
-  private convertScheduleToRawData(schedule: Schedule): RawSchedule {
-    const { startDate, endDate, ...others } = schedule;
+  private convertScheduleToRawData(schedule: Schedule): ScheduleForFirestore {
+    const { startTime, endTime, ...others } = schedule;
 
     return {
       ...others,
-      startDate: startDate.toISOString(),
-      endDate: endDate.toISOString()
-    }
+      startTime: startTime.toISOString(),
+      endTime: endTime.toISOString(),
+    };
   }
 }
