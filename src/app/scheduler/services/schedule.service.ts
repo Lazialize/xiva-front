@@ -1,10 +1,21 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, collectionData, CollectionReference, deleteDoc, doc, docData, DocumentReference, Firestore, updateDoc } from '@angular/fire/firestore';
+import {
+  addDoc,
+  collection,
+  collectionData,
+  CollectionReference,
+  deleteDoc,
+  doc,
+  docData,
+  DocumentReference,
+  Firestore,
+  updateDoc,
+} from '@angular/fire/firestore';
 import { map, Observable } from 'rxjs';
 import { Schedule, ScheduleForFirestore } from '../interfaces/schedule.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ScheduleService {
   private collection: CollectionReference;
@@ -17,14 +28,14 @@ export class ScheduleService {
     return collectionData(this.collection, { idField: 'id' }).pipe(
       map((schedules: ScheduleForFirestore[]) => {
         return schedules.map((schedule) => {
-          const { startTime, endTime, ...others} = schedule;
+          const { startTime, endTime, ...others } = schedule;
           return {
             ...others,
             startTime: new Date(startTime),
-            endTime: new Date(endTime)
-          }
-        })
-      })
+            endTime: new Date(endTime),
+          };
+        });
+      }),
     ) as Observable<Schedule[]>;
   }
 
@@ -52,7 +63,7 @@ export class ScheduleService {
     return {
       ...others,
       startTime: startTime.toISOString(),
-      endTime: endTime.toISOString()
-    }
+      endTime: endTime.toISOString(),
+    };
   }
 }

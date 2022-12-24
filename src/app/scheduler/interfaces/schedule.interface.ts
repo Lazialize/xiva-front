@@ -14,5 +14,5 @@ interface ITimestamp {
   endTime: Date;
 }
 
-export type ScheduleForFirestore = ScheduleCore & IStringTimestamp; 
+export type ScheduleForFirestore = ScheduleCore & IStringTimestamp;
 export type Schedule = ScheduleCore & ITimestamp;

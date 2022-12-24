@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'scheduler',
-    loadChildren: () => import('./scheduler/scheduler.module').then( m => m.SchedulerModule)
+    loadChildren: () => import('./scheduler/scheduler.module').then((m) => m.SchedulerModule),
   },
 ];
 
